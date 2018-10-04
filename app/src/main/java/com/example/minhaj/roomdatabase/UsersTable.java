@@ -9,7 +9,7 @@ import android.support.annotation.ColorInt;
  * Created by Minhaj on 01/10/2018.
  */
 
-@Entity
+@Entity(tableName = "users")
 public class UsersTable {
 
     @PrimaryKey
@@ -20,4 +20,28 @@ public class UsersTable {
 
     @ColumnInfo(name = "last_name")
     private String lastName;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }
