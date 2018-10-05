@@ -1,29 +1,36 @@
 package com.example.minhaj.roomdatabase;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     private MyDatabase myDatabase;
     private UsersTableDao usersTableDao;
 
+    private Button btnAddUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myDatabase = MyDatabaseSingleton.getInstance(this);
-        usersTableDao = myDatabase.usersTableDao();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                UsersTable user1 = new UsersTable();
-                user1.setFirstName("minhaj");
-                user1.setLastName("nadeem");
 
-                usersTableDao.insertUsers(user1);
+        btnAddUser = findViewById(R.id.btnAddUser);
+        btnAddUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity("add");
             }
-        }).start();
+        });
+    }
+
+    private void startActivity(String type) {
+        Intent intent = new Intent(this,DatabaseOpActivity.class);
+        intent.putExtra("type",type);
+        startActivity(intent);
     }
 }
